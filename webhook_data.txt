@@ -1,0 +1,8 @@
+2024-07-18T17:30:48.333384: {'activity': 'Ping'}
+2024-07-18T17:31:54.601065: {'activity': 'ConversationStarted', 'timestamp': '2024-07-18T17:31:54.6620814+02:00', 'sessionId': 7635642, 'language': 'cs', 'source': 'Default'}
+2024-07-18T17:32:42.923002: {'activity': 'ConversationStarted', 'timestamp': '2024-07-18T17:32:43.0187319+02:00', 'sessionId': 7635645, 'language': 'cs', 'source': 'Default'}
+2024-07-18T17:32:56.987969: {'activity': 'ConversationStarted', 'timestamp': '2024-07-18T17:32:57.0827186+02:00', 'sessionId': 7635647, 'language': 'cs', 'source': 'Default'}
+2024-07-18T17:33:41.299741: {'activity': 'ConversationStarted', 'timestamp': '2024-07-18T17:33:41.3901785+02:00', 'sessionId': 7635651, 'language': 'cs', 'source': 'Default'}
+2024-07-18T17:36:14.146065: {'activity': 'ConversationStarted', 'timestamp': '2024-07-18T17:36:14.2032128+02:00', 'sessionId': 7635657, 'language': 'cs', 'source': 'Default'}
+2024-07-18T17:36:14.173562: {'activity': 'Text', 'timestamp': '2024-07-18T17:36:12.101151+02:00', 'text': 'jak se máte?', 'sessionId': 7635657, 'language': 'cs', 'source': 'Default'}
+2024-07-18T17:37:24.582748: {'activity': 'GuestFileUpload', 'fileUrl': 'https://app.mluvii.com/Storage/Get?source=sharedFile&key=%7B%22id%22%3A%221660499a-cbdf-9e92-16bb-f958ac35db4c%22%7D&download=1', 'sessionId': 7635657, 'language': 'cs', 'source': 'Default'}

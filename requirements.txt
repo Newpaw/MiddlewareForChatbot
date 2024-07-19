@@ -1,0 +1,10 @@
+fastapi 
+uvicorn
+httpx
+loguru
+pytest
+python-dotenv
+pydantic_settings
+gunicorn
+aioredis
+pytz
