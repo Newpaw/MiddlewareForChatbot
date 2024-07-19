@@ -1,3 +1,4 @@
+import markdown
 from pydantic import BaseModel
 from loguru import logger
 from .assistent import FastAPIAssistant
@@ -12,6 +13,9 @@ class WebhookRequest(BaseModel):
     sessionId: int
     language: str
     source: str
+
+def convert_markdown_to_html(markdown_text):
+    return markdown.markdown(markdown_text)
 
 
 async def process_webhook(webhook: WebhookRequest, assistant: FastAPIAssistant, chatbot_sender: ChatbotActivitySender):
@@ -41,7 +45,8 @@ async def handle_webhook(webhook: WebhookRequest, assistant: FastAPIAssistant, c
 
         await chatbot_sender.send_typing(session_id, show=True)
         response = await assistant.chat(webhook.text, thread_id)
-        await chatbot_sender.send_activity(session_id, response)
+        response_html = convert_markdown_to_html(response)
+        await chatbot_sender.send_activity(session_id, response_html)
         await chatbot_sender.send_typing(session_id, show=False)
 
         logger.debug(f"Response from assistant: {response}")
