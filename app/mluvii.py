@@ -7,8 +7,9 @@ import pytz
 
 prague_tz = pytz.timezone('Europe/Prague')
 
+
 class ChatbotActivitySender:
-    def __init__(self, chatbot_id:str, base_url:str, client_id:str, client_secret:str):
+    def __init__(self, chatbot_id: str, base_url: str, client_id: str, client_secret: str):
         self.chatbot_id = chatbot_id
         self.base_url = base_url
         self.client_id = client_id
@@ -64,3 +65,26 @@ class ChatbotActivitySender:
             logger.error(
                 f"Failed to send activity: {response.status_code} - {response.text}")
             return None
+
+    async def send_typing(self, session_id: str, show: bool = True):
+        await self.ensure_token_valid()
+
+        payload = {
+            "sessionId": session_id,
+            "activity": "typing",
+            "show": show
+        }
+
+        headers = {
+            "Authorization": f"Bearer {self.access_token}",
+            "Content-Type": "application/json"
+        }
+
+        async with httpx.AsyncClient(follow_redirects=True) as client:
+            response = await client.post(self.endpoint, json=payload, headers=headers)
+
+        if response.status_code == 200:
+            logger.debug("Typing activity sent successfully")
+        else:
+            logger.error(
+                f"Failed to send typing activity: {response.status_code} - {response.text}")

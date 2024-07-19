@@ -4,6 +4,7 @@ from .assistent import FastAPIAssistant
 from .mluvii import ChatbotActivitySender
 from .database.redis import redis_client
 
+
 class WebhookRequest(BaseModel):
     activity: str
     timestamp: str
@@ -12,8 +13,10 @@ class WebhookRequest(BaseModel):
     language: str
     source: str
 
+
 async def process_webhook(webhook: WebhookRequest, assistant: FastAPIAssistant, chatbot_sender: ChatbotActivitySender):
     await handle_webhook(webhook, assistant, chatbot_sender)
+
 
 async def handle_webhook(webhook: WebhookRequest, assistant: FastAPIAssistant, chatbot_sender: ChatbotActivitySender):
     session_id = webhook.sessionId
@@ -35,8 +38,12 @@ async def handle_webhook(webhook: WebhookRequest, assistant: FastAPIAssistant, c
             return
 
     try:
+
+        await chatbot_sender.send_typing(session_id, show=True)
         response = await assistant.chat(webhook.text, thread_id)
         await chatbot_sender.send_activity(session_id, response)
+        await chatbot_sender.send_typing(session_id, show=False)
+
         logger.debug(f"Response from assistant: {response}")
     except Exception as e:
         logger.error(f"Error during chat process: {e}")
